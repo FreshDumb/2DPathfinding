@@ -21,12 +21,6 @@ public class NavAgent : MonoBehaviour
     float currentMoveTime;
     public float timeToHeading;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -79,32 +73,11 @@ public class NavAgent : MonoBehaviour
                 {
                     if(currentEdge.m_isJump == false)
                     {
-                        currentMoveTime += Time.deltaTime + getCurrentBufferedTime();
-                        timeToHeading = Vector2.Distance(currentEdge.m_destination.m_position, currentEdge.m_source.m_position) / navManagerRef.m_moveSpeed;
-                        if(currentMoveTime > timeToHeading)
-                        {
-                            setHeadingNodeAndAdjustPosition(currentMoveTime - timeToHeading);
-                        }
-                        else
-                        {
-                            transform.position = currentEdge.m_source.m_position + currentMoveTime * 
-                                                    navManagerRef.m_moveSpeed * (currentEdge.m_destination.m_position - currentEdge.m_source.m_position).normalized;
-                        }
+                        MoveGrounded();
                     }
                     else
                     {
-                        float tempSign = Mathf.Sign(currentEdge.m_destination.m_position.x - currentEdge.m_source.m_position.x);
-                        currentMoveTime += (Time.deltaTime + getCurrentBufferedTime());
-                        if (currentMoveTime > Mathf.Abs(currentEdge.m_weight))
-                        {
-                            setHeadingNodeAndAdjustPosition(currentMoveTime - Mathf.Abs(currentEdge.m_weight));
-                        }
-                        else
-                        {
-                            transform.position = navManagerRef.GetCurrentPositionInJump(currentMoveTime * tempSign, currentNode.m_position.x, currentNode.m_position.y,
-                                                    Mathf.Abs(currentEdge.m_jumpYVelocity) * tempSign, currentEdge.m_jumpXVelocity, navManagerRef.m_gravityMagnitude);
-
-                        }
+                        MoveInair();
                     }
                 }
             }
@@ -142,13 +115,44 @@ public class NavAgent : MonoBehaviour
         {
             float tempBufferedTime = bufferedTime;
             bufferedTime = 0;
-            return 0;
+            return tempBufferedTime;
         }
 
         void setClosestMouseNode()
         {
             Vector2 mouseWorldpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             closestNode = navManagerRef.GetClosestNodeToPosition(mouseWorldpos);
+        }
+
+        void MoveGrounded()
+        {
+            currentMoveTime += Time.deltaTime + getCurrentBufferedTime();
+            timeToHeading = Vector2.Distance(currentEdge.m_destination.m_position, currentEdge.m_source.m_position) / navManagerRef.m_moveSpeed;
+            if (currentMoveTime > timeToHeading)
+            {
+                setHeadingNodeAndAdjustPosition(currentMoveTime - timeToHeading);
+            }
+            else
+            {
+                transform.position = currentEdge.m_source.m_position + currentMoveTime *
+                                        navManagerRef.m_moveSpeed * (currentEdge.m_destination.m_position - currentEdge.m_source.m_position).normalized;
+            }
+        }  
+        
+        void MoveInair()
+        {
+            float tempSign = Mathf.Sign(currentEdge.m_destination.m_position.x - currentEdge.m_source.m_position.x);
+            currentMoveTime += (Time.deltaTime + getCurrentBufferedTime());
+            if (currentMoveTime > Mathf.Abs(currentEdge.m_weight))
+            {
+                setHeadingNodeAndAdjustPosition(currentMoveTime - Mathf.Abs(currentEdge.m_weight));
+            }
+            else
+            {
+                transform.position = MathUtils.GetCurrentPositionInJump(currentMoveTime * tempSign, currentNode.m_position.x, currentNode.m_position.y,
+                                        Mathf.Abs(currentEdge.m_jumpYVelocity) * tempSign, currentEdge.m_jumpXVelocity, navManagerRef.m_gravityMagnitude);
+
+            }
         }
     }
 }

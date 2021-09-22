@@ -58,14 +58,14 @@ public class NavMeshData : ScriptableObject
     public NavigationDataContainer_Row[] m_GraphNavigationData;
     //public NavigationDataContainer[,] m_GraphNavigationData;
 
-    public void InitNavMeshData(List<NavNode2D> _graphNodes)
+    public void InitNavMeshData()
     {
-        m_GraphNodes = new NavNode2D[_graphNodes.Count];
-        m_NodePositions = new Vector2[_graphNodes.Count];
-        for (int i = 0; i < _graphNodes.Count; i++)
+        m_GraphNodes = new NavNode2D[m_GraphNodes_temp.Count];
+        m_NodePositions = new Vector2[m_GraphNodes_temp.Count];
+        for (int i = 0; i < m_GraphNodes_temp.Count; i++)
         {
-            m_NodePositions[i] = _graphNodes[i].m_position;
-            m_GraphNodes[i] = _graphNodes[i];
+            m_NodePositions[i] = m_GraphNodes_temp[i].m_position;
+            m_GraphNodes[i] = m_GraphNodes_temp[i];
             m_GraphNodes[i].m_id = i;
         }
 
