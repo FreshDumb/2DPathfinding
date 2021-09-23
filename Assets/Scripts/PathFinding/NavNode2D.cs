@@ -10,7 +10,7 @@ public class NavNode2D : ScriptableObject
     public Vector2 m_position;
     public List<Edge> m_neighbours = new List<Edge>();
 
-    public Edge getNeighbour(int _id)
+    public Edge GetNeighbour(int _id)
     {
         foreach (Edge edge in m_neighbours)
         {

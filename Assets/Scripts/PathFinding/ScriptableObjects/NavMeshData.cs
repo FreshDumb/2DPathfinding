@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class NavigationDataContainer_Row
+public class NavDataContainer_Row
 {
     public NavigationDataContainer[] nodeData;
 
-    public NavigationDataContainer_Row(int _size)
+    public NavDataContainer_Row(int _size)
     {
         nodeData = new NavigationDataContainer[_size];
     }
@@ -18,27 +18,15 @@ public class NavigationDataContainer_Row
 [Serializable]
 public class NavigationDataContainer
 {
-    public float distance;
-    public int predecessorId;
-    public bool visited;
+    public float m_distance = float.MaxValue;
+    public int m_predecessorId = -1;
+    public bool m_visited = false;
 
     public NavigationDataContainer(float _distance, int _predecessorId)
     {
-        distance = _distance;
-        predecessorId = _predecessorId;
-        visited = false;
-    }
-    public void setDistance(float _distance)
-    {
-        distance = _distance;
-    }
-    public void setPredecessor(int _predecessorId)
-    {
-        predecessorId = _predecessorId;
-    }
-    public void setVisited()
-    {
-        visited = true;
+        m_distance = _distance;
+        m_predecessorId = _predecessorId;
+        m_visited = false;
     }
 }
 
@@ -53,18 +41,17 @@ public class NavMeshData : ScriptableObject
 
     // Built Data
     public NavNode2D[] m_GraphNodes;
-    public Vector2[] m_NodePositions;
 
-    public NavigationDataContainer_Row[] m_GraphNavigationData;
-    //public NavigationDataContainer[,] m_GraphNavigationData;
+    public NavDataContainer_Row[] m_GraphNavigationData;
+    
+    public float m_iJumpTestSubsteps;
+    public float m_gravityMagnitude;
 
     public void InitNavMeshData()
     {
         m_GraphNodes = new NavNode2D[m_GraphNodes_temp.Count];
-        m_NodePositions = new Vector2[m_GraphNodes_temp.Count];
         for (int i = 0; i < m_GraphNodes_temp.Count; i++)
         {
-            m_NodePositions[i] = m_GraphNodes_temp[i].m_position;
             m_GraphNodes[i] = m_GraphNodes_temp[i];
             m_GraphNodes[i].m_id = i;
         }
@@ -74,10 +61,10 @@ public class NavMeshData : ScriptableObject
 
     void BuildNavData()
     {
-        m_GraphNavigationData = new NavigationDataContainer_Row[m_GraphNodes.Length];
+        m_GraphNavigationData = new NavDataContainer_Row[m_GraphNodes.Length];
         for (int i = 0; i < m_GraphNavigationData.Length; i++)
         {
-            m_GraphNavigationData[i] = new NavigationDataContainer_Row(m_GraphNodes.Length);
+            m_GraphNavigationData[i] = new NavDataContainer_Row(m_GraphNodes.Length);
         }
 
         for (int i = 0; i < m_GraphNavigationData.Length; i++)
@@ -88,47 +75,47 @@ public class NavMeshData : ScriptableObject
     }
 
 
-    bool Dijkstra(int _sourceID)
+    void Dijkstra(int _sourceID)
     {
         List<int> nodeSetIDs = new List<int>();
-        NavigationDataContainer_Row tempRow = m_GraphNavigationData[_sourceID];
+        NavDataContainer_Row tempRow = m_GraphNavigationData[_sourceID];
 
         for (int i = 0; i < tempRow.nodeData.Length; i++)
         {
             tempRow.nodeData[i] = new NavigationDataContainer(float.MaxValue, -1);
         }
-        tempRow.nodeData[_sourceID].setDistance(0);
+        tempRow.nodeData[_sourceID].m_distance = 0;
         nodeSetIDs.Add(_sourceID);
 
         int Count = 0;
         while (nodeSetIDs.Count > 0)
         {
             int tempNodeID = nodeSetIDs[0];
-            float closestNodeDistance = tempRow.nodeData[tempNodeID].distance;
+            float closestNodeDistance = tempRow.nodeData[tempNodeID].m_distance;
 
             int indexToRemove = 0;
             for (int i = 0; i < nodeSetIDs.Count; i++)
             {
-                if (tempRow.nodeData[nodeSetIDs[i]].distance < closestNodeDistance)
+                if (tempRow.nodeData[nodeSetIDs[i]].m_distance < closestNodeDistance)
                 {
                     tempNodeID = nodeSetIDs[i];
-                    closestNodeDistance = tempRow.nodeData[nodeSetIDs[i]].distance;
+                    closestNodeDistance = tempRow.nodeData[nodeSetIDs[i]].m_distance;
                     indexToRemove = i;
                 }
             }
             nodeSetIDs.RemoveAt(indexToRemove);
 
-            tempRow.nodeData[tempNodeID].setVisited();
+            tempRow.nodeData[tempNodeID].m_visited = true;
             foreach (Edge edge in m_GraphNodes[tempNodeID].m_neighbours)
             {
-                float tempDistanceToNode = tempRow.nodeData[tempNodeID].distance + Mathf.Abs(edge.m_weight);
-                if (tempDistanceToNode < tempRow.nodeData[edge.m_destination.m_id].distance)
+                float tempDistanceToNode = tempRow.nodeData[tempNodeID].m_distance + Mathf.Abs(edge.m_weight);
+                if (tempDistanceToNode < tempRow.nodeData[edge.m_destination.m_id].m_distance)
                 {
-                    tempRow.nodeData[edge.m_destination.m_id].setDistance(tempDistanceToNode);
-                    tempRow.nodeData[edge.m_destination.m_id].setPredecessor(edge.m_source.m_id);
+                    tempRow.nodeData[edge.m_destination.m_id].m_distance = tempDistanceToNode;
+                    tempRow.nodeData[edge.m_destination.m_id].m_predecessorId = edge.m_source.m_id;
                 }
 
-                if (tempRow.nodeData[edge.m_destination.m_id].visited == false && 
+                if (tempRow.nodeData[edge.m_destination.m_id].m_visited == false && 
                     nodeSetIDs.Contains(edge.m_destination.m_id) == false)
                 {
                     nodeSetIDs.Add(edge.m_destination.m_id);
@@ -136,10 +123,9 @@ public class NavMeshData : ScriptableObject
             }
             Count++;
         }
-        return true;
     }
 
-    public Stack<int> GetRecursivePath(int _sourceID, int _targetID)
+    public Stack<int> GetPathBacktracking(int _sourceID, int _targetID)
     {
         int currentNodeId = _targetID;
 
@@ -149,7 +135,7 @@ public class NavMeshData : ScriptableObject
         path2.Push(currentNodeId);
         while (currentNodeId != _sourceID)
         {
-            currentNodeId = m_GraphNavigationData[_sourceID].nodeData[currentNodeId].predecessorId;
+            currentNodeId = m_GraphNavigationData[_sourceID].nodeData[currentNodeId].m_predecessorId;
             if (currentNodeId == -1)
             {
                 return null;
@@ -168,22 +154,39 @@ public class NavMeshData : ScriptableObject
         NavNode2D nextNode;
         while (_path.Count > 0)
         {
-            //if (currentNode.getNeighbour(_path.Peek()).m_isJump == true)
-            //{
-            //    Edge tempEdge = currentNode.getNeighbour(_path.Pop());
-            //    VisualizeJumpPath(tempEdge);
-            //    nextNode = tempEdge.m_destination;
-            //    currentNode = nextNode;
-            //}
-            //else
-            //{
-            //    nextNode = currentNode.getNeighbour(_path.Pop()).m_destination;
-            //    Debug.DrawLine(currentNode.m_position, nextNode.m_position, Color.red);
-            //    currentNode = nextNode;
-            //}
-            nextNode = currentNode.getNeighbour(_path.Pop()).m_destination;
-            Debug.DrawLine(currentNode.m_position, nextNode.m_position, Color.red);
-            currentNode = nextNode;
+            if (currentNode.GetNeighbour(_path.Peek()).m_isJump == true)
+            {
+                Edge tempEdge = currentNode.GetNeighbour(_path.Pop());
+                VisualizeJumpPath(tempEdge);
+                nextNode = tempEdge.m_destination;
+                currentNode = nextNode;
+            }
+            else
+            {
+                nextNode = currentNode.GetNeighbour(_path.Pop()).m_destination;
+                Debug.DrawLine(currentNode.m_position, nextNode.m_position, Color.red);
+                currentNode = nextNode;
+            }
+
+        }
+    }
+
+    void VisualizeJumpPath(Edge _jumpEdge)
+    {
+        float jumpTime = (_jumpEdge.m_destination.m_position.x - _jumpEdge.m_source.m_position.x) / _jumpEdge.m_jumpXVelocity;
+        float tempVelocity = MathUtils.GetPreciseJumpStartVelocity(_jumpEdge.m_source.m_position.y, _jumpEdge.m_destination.m_position.y, jumpTime, m_gravityMagnitude);
+        float singleTimeStep = jumpTime / m_iJumpTestSubsteps;
+        List<Vector2> JumpSubsteps = new List<Vector2>();
+        for (int i = 0; i < m_iJumpTestSubsteps; i++)
+        {
+            JumpSubsteps.Add(MathUtils.GetCurrentPositionInJump(singleTimeStep + singleTimeStep * i, _jumpEdge.m_source.m_position.x,
+                _jumpEdge.m_source.m_position.y, tempVelocity, _jumpEdge.m_jumpXVelocity, m_gravityMagnitude));
+        }
+        Debug.DrawLine(_jumpEdge.m_source.m_position, JumpSubsteps[0], Color.red);
+
+        for (int i = 0; i < JumpSubsteps.Count - 1; i++)
+        {
+            Debug.DrawLine(JumpSubsteps[i], JumpSubsteps[i + 1], Color.red);
         }
     }
 }
