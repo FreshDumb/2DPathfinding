@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b07da12f7a0184d9b3b28d90f6019c, type: 3}
   m_Name: Node_125
   m_EditorClassIdentifier: 
-  m_id: 0
-  m_position: {x: 0, y: 0}
-  m_neighbours: []
+  m_id: 121
+  m_position: {x: 11.549999, y: 4.6100006}
+  m_neighbours:
+  - m_weight: -0.025000095
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: ed0ea1712afe20347977614493dadcbb, type: 2}
+    m_isJump: 0
+    m_jumpYVelocity: 0
+    m_jumpXVelocity: 0
+  - m_weight: 0.025000095
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 3b1fef34190377540bdb0662783c3e1e, type: 2}
+    m_isJump: 0
+    m_jumpYVelocity: 0
+    m_jumpXVelocity: 0

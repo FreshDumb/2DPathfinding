@@ -12,6 +12,168 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b07da12f7a0184d9b3b28d90f6019c, type: 3}
   m_Name: Node_38
   m_EditorClassIdentifier: 
-  m_id: 0
-  m_position: {x: 0, y: 0}
-  m_neighbours: []
+  m_id: 35
+  m_position: {x: -3.82, y: 1.3400004}
+  m_neighbours:
+  - m_weight: 0.025000036
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: da0c30fcac3ae60469da9ff0f6d196e4, type: 2}
+    m_isJump: 0
+    m_jumpYVelocity: 0
+    m_jumpXVelocity: 0
+  - m_weight: -0.024999976
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: cb0654a53a1d3ef41a693e185cbdb2c9, type: 2}
+    m_isJump: 0
+    m_jumpYVelocity: 0
+    m_jumpXVelocity: 0
+  - m_weight: 0.7699998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: c89bb319a23e62b4b950135833de9bc7, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 3.9279208
+    m_jumpXVelocity: 4
+  - m_weight: 0.79499984
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: ebab5175c7f471b4ea15a38d29cf5802, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.0504704
+    m_jumpXVelocity: 4
+  - m_weight: 0.8199998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 590d8d7ee87e24f4ab6415d87f7e1c26, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.1731696
+    m_jumpXVelocity: 4
+  - m_weight: 0.8449998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: e980a595b9c33e84d90d390c92406799, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.296005
+    m_jumpXVelocity: 4
+  - m_weight: 0.8699998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 99a9b478ceeecf5458bec7d34732269e, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.4189644
+    m_jumpXVelocity: 4
+  - m_weight: 0.8949998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 86e6f8a2216d2d141aa5e6f8a073086b, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.542038
+    m_jumpXVelocity: 4
+  - m_weight: 0.91999984
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 3458f29ca4dce764986add850092a003, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.6652164
+    m_jumpXVelocity: 4
+  - m_weight: 0.9449998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 750fcfda24711d147a1c33020f3a4a5b, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.788491
+    m_jumpXVelocity: 4
+  - m_weight: 0.9699998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 698e0f6d7b8416d43b4667c1f4123e35, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.9118543
+    m_jumpXVelocity: 4
+  - m_weight: 0.9949998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: e13f2b684e4d5c440a9765dab645e227, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.0353003
+    m_jumpXVelocity: 4
+  - m_weight: 1.0199997
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: cab0a698381a1e14e8bfb5af511687be, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.158822
+    m_jumpXVelocity: 4
+  - m_weight: 1.0449998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 51b5931ff3587b04c9bc4972170d6dd7, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.2824154
+    m_jumpXVelocity: 4
+  - m_weight: 1.0699998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: d35e4a5c6e7bd6e4ebf08101525243a5, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.4060736
+    m_jumpXVelocity: 4
+  - m_weight: 1.0949998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 8a0dbed3c824a634688ac89999e67c30, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.5297933
+    m_jumpXVelocity: 4
+  - m_weight: 1.1199998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 9f4dac3afd14545449f97ce62919e8e4, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.65357
+    m_jumpXVelocity: 4
+  - m_weight: 1.1449997
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 61b9173bd2452644c9846f45f53f478c, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.7774005
+    m_jumpXVelocity: 4
+  - m_weight: 1.1699998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: af8f940fb27c2c54f8a3abe31ec496f9, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.901281
+    m_jumpXVelocity: 4
+  - m_weight: 1.1949998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 7b6187f531a55de40987b79bde587d7a, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.0252085
+    m_jumpXVelocity: 4
+  - m_weight: 1.2199998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: b800e9e4f6266d348a2dfe426421f83d, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.1491795
+    m_jumpXVelocity: 4
+  - m_weight: 1.2449998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: a8e1313f47bb59e40852758c8c1e4b81, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.2731915
+    m_jumpXVelocity: 4
+  - m_weight: 1.2699997
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 1bbfab21853cdfa49a4f7b601fb1480a, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.3972425
+    m_jumpXVelocity: 4
+  - m_weight: 1.2949998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 2dccf7fe2459290459bdd2821230dc8f, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.5213313
+    m_jumpXVelocity: 4
+  - m_weight: 1.3199998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: e6054a809ee43fc4e84cf5c47f2a629f, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.6454535
+    m_jumpXVelocity: 4
+  - m_weight: 1.3449998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: b9004104d4e911b48aa4c8dcc0416ba4, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.7696085
+    m_jumpXVelocity: 4
+  - m_weight: 1.3699999
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 8aef4e8564ea5dc47a0ec3347b6a4d1e, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.893795
+    m_jumpXVelocity: 4

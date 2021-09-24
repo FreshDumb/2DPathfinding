@@ -12,6 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b07da12f7a0184d9b3b28d90f6019c, type: 3}
   m_Name: Node_56
   m_EditorClassIdentifier: 
-  m_id: 0
-  m_position: {x: 0, y: 0}
-  m_neighbours: []
+  m_id: 53
+  m_position: {x: -5.62, y: 1.3400002}
+  m_neighbours:
+  - m_weight: 0.024999976
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: bb8a007e1d7893f4a940f5578f877a6a, type: 2}
+    m_isJump: 0
+    m_jumpYVelocity: 0
+    m_jumpXVelocity: 0
+  - m_weight: -0.025000095
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 93147afbc9ff431468d7ddbd5ae77302, type: 2}
+    m_isJump: 0
+    m_jumpYVelocity: 0
+    m_jumpXVelocity: 0
+  - m_weight: 1.2199998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: c89bb319a23e62b4b950135833de9bc7, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.1491795
+    m_jumpXVelocity: 4
+  - m_weight: 1.2449998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: ebab5175c7f471b4ea15a38d29cf5802, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.2731915
+    m_jumpXVelocity: 4

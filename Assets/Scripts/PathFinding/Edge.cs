@@ -7,8 +7,8 @@ using UnityEngine;
 public class Edge
 {
     public float m_weight;
-    public NavNode2D m_source { get; private set; }
-    public NavNode2D m_destination { get; private set; }
+    public NavNode2D m_source;
+    public NavNode2D m_destination;
     public bool m_isJump = false;
     public float m_jumpYVelocity;
     public float m_jumpXVelocity;

@@ -12,6 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b07da12f7a0184d9b3b28d90f6019c, type: 3}
   m_Name: Node_55
   m_EditorClassIdentifier: 
-  m_id: 0
-  m_position: {x: 0, y: 0}
-  m_neighbours: []
+  m_id: 52
+  m_position: {x: -5.52, y: 1.3400002}
+  m_neighbours:
+  - m_weight: 0.024999976
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 4bc6870a77076e043a22f9b0572983cc, type: 2}
+    m_isJump: 0
+    m_jumpYVelocity: 0
+    m_jumpXVelocity: 0
+  - m_weight: -0.024999976
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 9f31d31430959744f830d87575ddced0, type: 2}
+    m_isJump: 0
+    m_jumpYVelocity: 0
+    m_jumpXVelocity: 0
+  - m_weight: 1.1949998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: c89bb319a23e62b4b950135833de9bc7, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.0252085
+    m_jumpXVelocity: 4
+  - m_weight: 1.2199998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: ebab5175c7f471b4ea15a38d29cf5802, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.1491795
+    m_jumpXVelocity: 4
+  - m_weight: 1.2449998
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 590d8d7ee87e24f4ab6415d87f7e1c26, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 6.2731915
+    m_jumpXVelocity: 4

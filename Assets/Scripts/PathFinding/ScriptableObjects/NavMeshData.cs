@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [Serializable]
@@ -30,7 +31,7 @@ public class NavigationDataContainer
     }
 }
 
-
+[Serializable]
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SpawnManagerScriptableObject", order = 1)]
 public class NavMeshData : ScriptableObject
 {
@@ -54,6 +55,9 @@ public class NavMeshData : ScriptableObject
         {
             m_GraphNodes[i] = m_GraphNodes_temp[i];
             m_GraphNodes[i].m_id = i;
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(m_GraphNodes[i]);
+#endif
         }
 
         BuildNavData();
@@ -71,6 +75,11 @@ public class NavMeshData : ScriptableObject
         {
             Dijkstra(i);
         }
+
+#if UNITY_EDITOR
+        EditorUtility.SetDirty(this);
+#endif
+
         Debug.Log("Navigation Data Built!");
     }
 

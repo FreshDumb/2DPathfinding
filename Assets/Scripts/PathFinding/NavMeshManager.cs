@@ -41,6 +41,8 @@ public class NavMeshManager : MonoBehaviour
         m_navMeshDataSORef.m_GraphNodes_temp = new List<NavNode2D>();
         m_navMeshDataSORef.m_GraphEdges_temp = new List<Edge>();
         m_navMeshDataSORef.m_JumpEdges_temp = new List<Edge>();
+        m_navMeshDataSORef.m_GraphNodes = new NavNode2D[0];
+
         m_checkForJump = new Queue<Edge>();
 
         m_fJumpStartVelocity = Mathf.Sqrt(2.0f * m_gravityMagnitude * m_fJumpHeight);
@@ -72,6 +74,9 @@ public class NavMeshManager : MonoBehaviour
         m_navMeshDataSORef.m_iJumpTestSubsteps = m_iJumpTestSubsteps;
         m_navMeshDataSORef.InitNavMeshData();
 
+#if UNITY_EDITOR
+        EditorUtility.SetDirty(this);
+#endif
         return true;
     }
 
@@ -184,6 +189,13 @@ public class NavMeshManager : MonoBehaviour
         List<string> outFailedPaths = new List<string>();
         AssetDatabase.DeleteAssets(nodeAssetPaths, outFailedPaths);
         AssetDatabase.CreateFolder("Assets/BuiltData", "Nodes");
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+
+        EditorUtility.UnloadUnusedAssetsImmediate();
+        Resources.UnloadUnusedAssets();
+        System.GC.Collect();
+
 
         for (int i = 0; i < m_allNodes.Count; i++)
         {
@@ -194,6 +206,7 @@ public class NavMeshManager : MonoBehaviour
 
             Debug.Log("Added Node " + i);
         }
+
         AssetDatabase.SaveAssets();
     }
 
@@ -215,7 +228,12 @@ public class NavMeshManager : MonoBehaviour
         }
         for (int i = 0; i < m_navMeshDataSORef.m_GraphNodes_temp.Count; i++)
         {
-            if(m_navMeshDataSORef.m_GraphNodes_temp[i].m_neighbours.Count == 0)
+            if(m_navMeshDataSORef.m_GraphNodes_temp[i].m_neighbours == null)
+            {
+                m_navMeshDataSORef.m_GraphNodes_temp.RemoveAt(i);
+                i--;
+            }
+            else if(m_navMeshDataSORef.m_GraphNodes_temp[i].m_neighbours.Count == 0)
             {
                 m_navMeshDataSORef.m_GraphNodes_temp.RemoveAt(i);
                 i--;
@@ -324,15 +342,19 @@ public class NavMeshManager : MonoBehaviour
 
     bool SetNodeNeighbour(Edge _newEdge)
     {
-        for (int i = 0; i < _newEdge.m_source.m_neighbours.Count; i++)
+        if(_newEdge.m_source.m_neighbours != null)
         {
-            if(_newEdge.m_destination.m_id == _newEdge.m_source.m_neighbours[i].m_destination.m_id)
+            for (int i = 0; i < _newEdge.m_source.m_neighbours.Count; i++)
             {
-                return false;
+                if (_newEdge.m_destination.m_id == _newEdge.m_source.m_neighbours[i].m_destination.m_id)
+                {
+                    return false;
+                }
             }
         }
 
-        _newEdge.m_source.m_neighbours.Add(_newEdge);
+
+        _newEdge.m_source.AddNeighbour(_newEdge);
         return true;
     }
 

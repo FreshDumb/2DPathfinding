@@ -12,6 +12,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b07da12f7a0184d9b3b28d90f6019c, type: 3}
   m_Name: Node_94
   m_EditorClassIdentifier: 
-  m_id: 0
-  m_position: {x: 0, y: 0}
-  m_neighbours: []
+  m_id: 90
+  m_position: {x: 8.45, y: 4.61}
+  m_neighbours:
+  - m_weight: -0.025000095
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 19b8579dcd7eb2d48a72018244d87ea6, type: 2}
+    m_isJump: 0
+    m_jumpYVelocity: 0
+    m_jumpXVelocity: 0
+  - m_weight: 0.024999857
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 464ed1e89e2df374cbde19a7e3fb9c24, type: 2}
+    m_isJump: 0
+    m_jumpYVelocity: 0
+    m_jumpXVelocity: 0
+  - m_weight: 1.5225
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 0982e0631d0de654fb903cf3431c54c0, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.504126
+    m_jumpXVelocity: 4
+  - m_weight: 1.4975002
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 5ba4a89024de8174cafb248c94f3fd46, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.343929
+    m_jumpXVelocity: 4
+  - m_weight: 1.4725001
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 42270265e326f654e86f03bb642ed55f, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.1825347
+    m_jumpXVelocity: 4
+  - m_weight: 1.4475001
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: e37170b40902b6e4d8fb008698ea3f48, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 5.0198846
+    m_jumpXVelocity: 4
+  - m_weight: 1.4225001
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: fa961d23b4bd489498ada770ab2421d7, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.855911
+    m_jumpXVelocity: 4
+  - m_weight: 1.3975
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 7b49f05509775e84fb46c54f08ad6243, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.6905417
+    m_jumpXVelocity: 4
+  - m_weight: 1.1450001
+    m_source: {fileID: 11400000}
+    m_destination: {fileID: 11400000, guid: 8a252788dddadb44d866e3e30f39dd74, type: 2}
+    m_isJump: 1
+    m_jumpYVelocity: 4.3538213
+    m_jumpXVelocity: 4
