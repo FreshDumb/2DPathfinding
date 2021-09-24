@@ -354,7 +354,7 @@ public class NavMeshManager : MonoBehaviour
         }
 
 
-        _newEdge.m_source.AddNeighbour(_newEdge);
+        _newEdge.m_source.m_neighbours.Add(_newEdge);
         return true;
     }
 

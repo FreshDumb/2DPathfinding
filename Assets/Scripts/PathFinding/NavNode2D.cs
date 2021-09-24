@@ -21,17 +21,4 @@ public class NavNode2D : ScriptableObject
         }
         return null;
     }
-
-    public void AddNeighbour(Edge _newNeighbour)
-    {
-        if(m_neighbours != null)
-        {
-            m_neighbours.Add(_newNeighbour);
-        }
-        else
-        {
-            m_neighbours = new List<Edge>();
-            m_neighbours.Add(_newNeighbour);
-        }
-    }
 }
